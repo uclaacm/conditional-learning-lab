@@ -1,12 +1,21 @@
 @import 'global';
 
 #bar {
+  align-items: center;
   background-color: #323232;
   border-radius: 10px;
   bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 50px;
+  justify-items: center;
   left: 50%;
   position: fixed;
   transform: translate(-50%, 0); //this is to center, there's definitely a better way
-  width: 90vw;
+  width: 90vw; 
+} 
+
+.stats-display {
+  margin: 0;
 }
+
