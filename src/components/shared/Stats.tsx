@@ -6,22 +6,23 @@ interface statsProps {
   hunger: number;
 }
 
+
 export default function Stats(props:statsProps): JSX.Element {
   const { battery, speed, strength, hunger } = props;
 
   return (
     <div id="bar">
       <p className="stats-display">
-        Battery: {battery}
+        Battery <span className="stats-value"> {battery} </span>
       </p>
       <p className="stats-display">
-        Speed: {speed}
+        Speed <span className="stats-value"> {speed} </span>
       </p>
       <p className="stats-display">
-        Strength: {strength}
+        Strength <span className="stats-value"> {strength} </span>
       </p>
       <p className="stats-display">
-        Hunger: {hunger}
+        Hunger <span className="stats-value"> {hunger} </span>
       </p>
     </div>
   );

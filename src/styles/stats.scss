@@ -19,3 +19,28 @@
   margin: 0;
 }
 
+.stats-display:nth-child(1) {
+  color: #ff5630;
+}
+
+.stats-display:nth-child(2) { 
+  color: #ffab00;
+}
+
+.stats-display:nth-child(3) {
+  color: #36b37e;
+}
+
+.stats-display:nth-child(4) {
+  color: #00b8d9;
+}
+
+.stats-value {
+  background-color: white;
+  border-radius: 10%;
+  color: black;
+  display: inline-block;
+  justify-content: center;
+  margin: 0 0.5em;
+  padding: 0.25em 1em;
+}
