@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import {generateInitialStats} from '../common/math';
 import Landing from './pages/Landing';
 import Footer from './shared/Footer';
 import Stats from './shared/Stats';
@@ -8,10 +9,10 @@ import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
 function App(): JSX.Element {
-  const [battery, setBattery] = useState(Math.floor(Math.random() * 10) + 1);
-  const [speed, setSpeed] = useState(Math.floor(Math.random() * 10) + 1);
-  const [strength, setStrength] = useState(Math.floor(Math.random() * 10) + 1);
-  const [hunger, setHunger] = useState(Math.floor(Math.random() * 10) + 1);
+  const [battery, setBattery] = useState(generateInitialStats());
+  const [speed, setSpeed] = useState(generateInitialStats());
+  const [strength, setStrength] = useState(generateInitialStats());
+  const [hunger, setHunger] = useState(generateInitialStats());
 
   const onClick = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
     setBattery(battery + addBattery);

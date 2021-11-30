@@ -7,23 +7,33 @@ interface statsProps {
 }
 
 
-export default function Stats(props:statsProps): JSX.Element {
+export default function Stats(props: statsProps): JSX.Element {
   const { battery, speed, strength, hunger } = props;
+
+  interface statValues {
+    [key: string]: number | undefined,
+  }
+
+  const statValues : statValues = {
+    Battery: battery,
+    Speed: speed,
+    Strength: strength,
+    Hunger: hunger,
+  };
+
+  const renderStats = () => {
+    return Object.keys(statValues).map((key, index) => {
+      return (
+        <p key={index} className="stats-display">
+          {key} <span className="stats-value"> {statValues[key]} </span>
+        </p>
+      );
+    });
+  };
 
   return (
     <div id="bar">
-      <p className="stats-display">
-        Battery <span className="stats-value"> {battery} </span>
-      </p>
-      <p className="stats-display">
-        Speed <span className="stats-value"> {speed} </span>
-      </p>
-      <p className="stats-display">
-        Strength <span className="stats-value"> {strength} </span>
-      </p>
-      <p className="stats-display">
-        Hunger <span className="stats-value"> {hunger} </span>
-      </p>
+      {renderStats()}
     </div>
   );
 }
