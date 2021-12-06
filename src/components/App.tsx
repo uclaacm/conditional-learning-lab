@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import {generateInitialStats} from '../common/math';
+import {generateRandomInteger} from '../common/math';
 import Landing from './pages/Landing';
 import Footer from './shared/Footer';
 import Stats from './shared/Stats';
@@ -9,16 +9,20 @@ import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
 function App(): JSX.Element {
-  const [battery, setBattery] = useState(generateInitialStats());
-  const [speed, setSpeed] = useState(generateInitialStats());
-  const [strength, setStrength] = useState(generateInitialStats());
-  const [hunger, setHunger] = useState(generateInitialStats());
+  const [playerStats, setPlayerStats] = useState({
+    battery: generateRandomInteger(1,10),
+    speed: generateRandomInteger(1,10),
+    hunger: generateRandomInteger(1,10),
+    strength: generateRandomInteger(1,10),
+  });
 
   const onClick = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
-    setBattery(battery + addBattery);
-    setSpeed(speed + addSpeed);
-    setStrength(strength + addStrength);
-    setHunger(hunger + addHunger);
+    setPlayerStats({
+      battery: playerStats.battery + addBattery,
+      speed: playerStats.speed + addSpeed,
+      hunger: playerStats.hunger + addHunger,
+      strength: playerStats.strength + addStrength,
+    });
   };
 
   return (
@@ -28,7 +32,7 @@ function App(): JSX.Element {
         <Switch>
           <Route exact path ="/"><Landing/></Route>
         </Switch>
-        <Stats speed={speed} hunger={hunger} strength={strength} battery={battery}/>
+        <Stats playerStats={playerStats}/>
         <Footer/>
       </div>
     </Router>
