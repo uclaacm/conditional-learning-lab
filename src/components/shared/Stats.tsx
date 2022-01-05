@@ -1,8 +1,5 @@
 import '../../styles/stats.scss';
-
-type statsObject = {
-  [key: string]: number,
-}
+import { statsObject } from '../../common/types';
 
 interface statsProps {
   playerStats: statsObject,
@@ -11,19 +8,17 @@ interface statsProps {
 export default function Stats(props: statsProps): JSX.Element {
   const { playerStats } = props;
 
-  const renderStats = () => {
-    return Object.keys(playerStats).map((key, index) => {
-      return (
-        <p key={index} className="stats-display">
-          {key} <span className="stats-value"> {playerStats[key]} </span>
-        </p>
-      );
-    });
-  };
-
   return (
     <div id="bar">
-      {renderStats()}
+      {
+        Object.keys(playerStats).map((key, index) => {
+          return (
+            <p key={index} className="stats-display">
+              {key} <span className="stats-value"> {playerStats[key]} </span>
+            </p>
+          );
+        })
+      }
     </div>
   );
 }

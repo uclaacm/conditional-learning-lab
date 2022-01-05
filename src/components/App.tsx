@@ -8,6 +8,7 @@ import UpperSection from './shared/UpperSection';
 import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
+
 function App(): JSX.Element {
   const [playerStats, setPlayerStats] = useState({
     battery: generateRandomInteger(1,10),
