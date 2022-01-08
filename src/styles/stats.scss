@@ -1,12 +1,55 @@
 @import 'global';
 
+
+
+
 #bar {
+  align-items: center;
   background-color: #323232;
   border-radius: 10px;
   bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 50px;
+  justify-items: center;
   left: 50%;
+  padding: 1em;
   position: fixed;
   transform: translate(-50%, 0); //this is to center, there's definitely a better way
-  width: 90vw;
+  width: 90vw; 
+} 
+
+$stats-red: #ff5630;
+$stats-orange: #ffab00;
+$stats-green: #36b37e;
+$stats-blue: #00b8d9;
+
+.stats-display {
+  margin: 0;
+}
+
+.stats-display:nth-child(1) {
+  color: $stats-red;
+}
+
+.stats-display:nth-child(2) { 
+  color: $stats-orange;
+}
+
+.stats-display:nth-child(3) {
+  color: $stats-green;
+}
+
+.stats-display:nth-child(4) {
+  color: $stats-blue;
+}
+
+.stats-value {
+  background-color: white;
+  border-radius: 10%;
+  color: black;
+  display: inline-block;
+  justify-content: center;
+  margin: 0 0.5em;
+  padding: 0.25em 1em;
 }
