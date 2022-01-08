@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import {generateRandomInteger} from '../common/math';
+import { statsObject } from '../common/types';
 import Landing from './pages/Landing';
 import Footer from './shared/Footer';
 import Stats from './shared/Stats';
@@ -8,9 +9,8 @@ import UpperSection from './shared/UpperSection';
 import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
-
 function App(): JSX.Element {
-  const [playerStats, setPlayerStats] = useState({
+  const [playerStats, setPlayerStats] = useState<statsObject>({
     battery: generateRandomInteger(1,10),
     speed: generateRandomInteger(1,10),
     hunger: generateRandomInteger(1,10),

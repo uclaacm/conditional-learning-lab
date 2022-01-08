@@ -1,3 +1,6 @@
 export type statsObject = {
-  [key: string]: number,
+  battery: number,
+  speed: number,
+  hunger: number,
+  strength: number,
 }
