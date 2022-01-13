@@ -3,7 +3,6 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import {generateRandomInteger} from '../common/math';
 import { statsObject } from '../common/types';
 import Landing from './pages/Landing';
-import English from './pages/English';
 import EasyIf from './pages/EasyIf';
 import HungerIfElse from './pages/HungerIfElse';
 import ObstacleIfElse from './pages/ObstacleIfElse';
@@ -38,7 +37,6 @@ function App(): JSX.Element {
         <UpperSection onClick={onClick}/>
         <Switch>
           <Route exact path ="/"><Landing/></Route>
-          <Route exact path ="/english"><English/></Route>
           <Route exact path ="/easyif"><EasyIf/></Route>
           <Route exact path="/hungerifelse"><HungerIfElse/></Route>
           <Route exact path="/obstacleifelse"><ObstacleIfElse/></Route>
