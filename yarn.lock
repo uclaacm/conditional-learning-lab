@@ -3075,19 +3075,17 @@ css-color-names@1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/css-color-names/-/css-color-names-1.0.1.tgz"
 
-css-loader@^5.2.6:
-  version "5.2.6"
-  resolved "https://registry.npmjs.org/css-loader/-/css-loader-5.2.6.tgz"
+css-loader@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-6.5.1.tgz#0c43d4fbe0d97f699c91e9818cb585759091d1b1"
   dependencies:
     icss-utils "^5.1.0"
-    loader-utils "^2.0.0"
     postcss "^8.2.15"
     postcss-modules-extract-imports "^3.0.0"
     postcss-modules-local-by-default "^4.0.0"
     postcss-modules-scope "^3.0.0"
     postcss-modules-values "^4.0.0"
     postcss-value-parser "^4.1.0"
-    schema-utils "^3.0.0"
     semver "^7.3.5"
 
 css-select@^4.1.3:
