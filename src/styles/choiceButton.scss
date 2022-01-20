@@ -1,1 +1,12 @@
 @import 'global';
+
+.choice-button {
+  background-color: $orange-main;
+  font-size: medium;
+  color: white;
+  border: 0px;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
+  padding: 1vw 2vw;
+  border-radius: 1vw;
+  margin: 0.5vw;
+}

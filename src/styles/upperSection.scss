@@ -4,8 +4,47 @@
   display: flex;
   justify-content: space-around;
 }
-  
+
 #description {
   padding-top: 100px;
   width: 40vw;
+}
+
+.hljs {
+  margin: 0;
+  text-align: left;
+  font-size: calc(1vw + 5px);
+  color: #e5e5e5;
+}
+
+#code {
+  box-sizing: border-box;
+  border: solid 10px #b47338;
+  padding: 3vw 5vw;
+  background-color: #323232;
+  border-radius: 20px;
+  margin-bottom: 2vw;
+}
+
+.hljs-string {
+  color: $green;
+}
+
+.hljs-number {
+  color: $blue;
+}
+
+.hljs-keyword {
+  color: $orange;
+}
+
+.hljs-built_in {
+  color: $orange;
+}
+
+.hook {
+  margin: 0 20%;
+  height: 6vw;
+  border-left: solid 10px #b47338;
+  border-right: solid 10px #b47338;
 }

@@ -9,7 +9,7 @@ interface statsProps {
 export default function Stats(props:statsProps): JSX.Element {
   return (
     <Link to={props.toPage}>
-      <button onClick={props.onClick}>{props.text}</button>
+      <button className="choice-button" onClick={props.onClick}>{props.text}</button>
     </Link>
   );
 }

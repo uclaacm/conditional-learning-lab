@@ -2,6 +2,8 @@ import '../../styles/upperSection.scss';
 import { useLocation } from 'react-router-dom';
 import ChoiceButton from './ChoiceButton';
 
+import SyntaxHighLighter from 'react-syntax-highlighter';
+
 interface upperSectionProps {
   onClick: (addBattery:number,addSpeed:number,addStrength:number,addHunger:number) => void;
 }
@@ -15,6 +17,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   const currentPage = location.pathname;
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
 
+  let codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")']
+
   //Parameters for nextPage are (addbattery,addspeed,addstrength,addhunger)
   switch (currentPage) {
     case '/':
@@ -25,6 +29,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Ask Friend for Food" toPage={nextPage} onClick={() => props.onClick(0,0,0,4)}/>
         </div>
       );
+
       break;
     case '/second':
       description = 'Easy if statement page...';
@@ -41,8 +46,23 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   return (
     <div id="upper-section">
       <div id="description">{description}</div>
-      <div>
-        <div>code section</div>
+      <div id="upper-right">
+        <div className="hook"></div>
+        <div id="code">
+          {codeContent.map((item) =>{
+              let indents = 0;
+              for (let i = 0; i < item.length; i++){ 
+                if(item[i] == ' ') indents+=1
+                else break 
+              } 
+              // console.log(marginIndex)
+              return <SyntaxHighLighter  key={item} language="python" style={{marginLeft: indents}} useInlineStyles={false}>
+                {item}
+              </SyntaxHighLighter>
+            }
+          )}
+        </div>
+        
         {buttons}
       </div>
     </div>
