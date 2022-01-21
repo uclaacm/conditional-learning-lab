@@ -1,4 +1,3 @@
-/* eslint-disable no-duplicate-case */
 import '../../styles/upperSection.scss';
 import { useLocation } from 'react-router-dom';
 import ChoiceButton from './ChoiceButton';
@@ -9,7 +8,6 @@ interface upperSectionProps {
 
 //UpperSection contains description, code and buttons
 export default function UpperSection(props:upperSectionProps): JSX.Element {
-  // As of right now, we have description being a string. Should it be an array?
   let description;
   let buttons;
   //Stores types of pages that are moved through in nextPage
@@ -20,12 +18,10 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   // Automatically finds nextPage to be used for ChoiceButton
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
 
-  // Parameters for nextPage are (addbattery,addspeed,addstrength,addhunger)
-  // Should I assume that the above parameters should be added to a different variable?
-  // Also, have we decided on specific values for buttons?
+  // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
+  // Once clicked, certain stats are increased in value, depending on our specific needs for that page
   switch (currentPage) {
     case '/':
-      // Do we need a code component as well?
       description = "Welcome to the Conditional Learning Lab! Today we'll learn about conditionals in Python! Conditionals are statements that run \
       an action when true. We use conditionals when we want to perform actions, but only under certain circumstances!\nFor example, if the robot is low \
       on energy, then it should recharge. Otherwise, the robot should keep moving. Read the following code and check your stats to see if you need to fill up!";
