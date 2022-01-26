@@ -24,7 +24,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
 
   const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
 
-// Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
+  // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
   switch (currentPage) {
     case '/':
