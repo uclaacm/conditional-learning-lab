@@ -2,11 +2,15 @@
 
 .choice-button {
   background-color: $orange-main;
-  font-size: medium;
-  color: white;
-  border: 0px;
-  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
-  padding: 1vw 2vw;
+  border: 0;
   border-radius: 1vw;
+  color: white;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-size: medium;
   margin: 0.5vw;
+  padding: 1vw 2vw;
+}
+
+.choice-button:hover {
+  cursor: pointer;
 }
