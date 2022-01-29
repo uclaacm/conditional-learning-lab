@@ -18,7 +18,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   // Automatically finds nextPage to be used for ChoiceButton
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
 
-  // Parameters for onClick are (addBattery, addSpeed, addHunger, addStrength)
+  // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
   // NOTE: Switched the order of the first two in Figma because I felt that more variables would be
   // different, which would test them better when they re-do the learning lab.
@@ -37,8 +37,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       // This might not work because speed is randomly generated, but we can decide to not make that part random.
       buttons = (
         <div>
-          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(-5,5,2,0)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,2,0)}/>
+          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(-5,5,0,2)}/>
+          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,0,2)}/>
         </div>
       );
       break;
@@ -48,8 +48,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       you need to fill up!";
       buttons = (
         <div>
-          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,-2,2,0)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,2,0)}/>
+          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,-2,0,2)}/>
+          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,0,2)}/>
         </div>
       );
       break;
@@ -58,7 +58,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
        will waste time eating when you could be walking! Should you eat food?";
       buttons = (
         <div>
-          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,-2,-5,0)}/>
+          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,-2,0,-5)}/>
           <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
@@ -69,7 +69,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       buttons = (
         <div>
           <ChoiceButton text="Go around" toPage={nextPage} onClick={() => props.onClick(0,1,0,0)}/>
-          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,-2,0,5)}/>
+          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,-2,5,0)}/>
         </div>
       );
       break;
@@ -80,9 +80,9 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       // to include it as part of final score
       buttons = (
         <div>
-          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,0,2)}/>
-          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,0,3)}/>
-          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,0,4)}/>
+          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,2,0)}/>
+          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,3,0)}/>
+          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,4,0)}/>
         </div>
       );
       break;
