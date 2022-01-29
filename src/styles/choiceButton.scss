@@ -1,1 +1,16 @@
 @import 'global';
+
+.choice-button {
+  background-color: #ffab00;
+  border: 0;
+  border-radius: 1em;
+  height: 3em;
+  margin: 0.5em;
+  padding: 0 1em;
+
+  &:hover {
+    background-color: #d48e00;
+    cursor: pointer;
+    transition-duration: 0.2s;
+  }
+}

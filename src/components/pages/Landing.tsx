@@ -1,6 +1,13 @@
+import React from 'react';
+import PlayAgain from '../shared/PlayAgain';
+
 export default function Landing(): JSX.Element {
 
   return (
-    <div>test</div>
+    <React.Fragment>
+      <PlayAgain>
+
+      </PlayAgain>
+    </React.Fragment>
   );
 }
