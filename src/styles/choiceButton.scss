@@ -1,16 +1,16 @@
 @import 'global';
 
 .choice-button {
-  background-color: #ffab00;
+  background-color: $orange-main;
   border: 0;
-  border-radius: 1em;
-  height: 3em;
-  margin: 0.5em;
-  padding: 0 1em;
+  border-radius: 1vw;
+  color: white;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-size: medium;
+  margin: 0.5vw;
+  padding: 1vw 2vw;
+}
 
-  &:hover {
-    background-color: #d48e00;
-    cursor: pointer;
-    transition-duration: 0.2s;
-  }
+.choice-button:hover {
+  cursor: pointer;
 }
