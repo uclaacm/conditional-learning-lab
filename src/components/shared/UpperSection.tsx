@@ -1,6 +1,8 @@
 import '../../styles/upperSection.scss';
 import { useLocation } from 'react-router-dom';
+import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
+
 
 interface upperSectionProps {
   onClick: (addBattery:number,addSpeed:number,addStrength:number,addHunger:number) => void;
@@ -18,6 +20,10 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   // Automatically finds nextPage to be used for ChoiceButton
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
 
+  //Lines of code (spaces indicate indentation, 4 spaces for each tab)
+
+  const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
   switch (currentPage) {
@@ -32,6 +38,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Keep moving" toPage={nextPage} onClick={() => props.onClick(0,0,0,4)}/>
         </div>
       );
+
       break;
     case '/EasyIf':
       description = "You want to be able reach the next stage in time, but you aren't sure if you will be fast enough. Read the following line of code \
@@ -91,8 +98,23 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   return (
     <div id="upper-section">
       <div id="description">{description}</div>
-      <div>
-        <div>code section</div>
+      <div id="upper-right">
+        <div className="hook"></div>
+        <div id="code">
+          {codeContent.map((item) =>{
+            let indents = 0;
+            for (let i = 0; i < item.length; i++){
+              if(item[i] == ' ') indents+=1;
+              else break;
+            }
+            // console.log(marginIndex)
+            return <SyntaxHighLighter  key={item} language="python" style={{marginLeft: indents}} useInlineStyles={false}>
+              {item}
+            </SyntaxHighLighter>;
+          },
+          )}
+        </div>
+
         {buttons}
       </div>
     </div>

@@ -4,8 +4,48 @@
   display: flex;
   justify-content: space-around;
 }
-  
+
 #description {
   padding-top: 100px;
   width: 40vw;
+}
+
+.hljs {
+  color: #e5e5e5;
+  font-size: calc(1vw + 5px);
+  margin: 0;
+  text-align: left;
+}
+
+#code {
+  background-color: #323232;
+  border: solid 10px #b47338;
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-bottom: 2vw;
+  padding: 3vw 5vw;
+}
+
+.hljs-string {
+  color: $green;
+}
+
+.hljs-number {
+  color: $blue;
+}
+
+.hljs-keyword {
+  color: $orange;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.hljs-built_in {
+  color: $orange;
+}
+
+.hook {
+  border-left: solid 10px #b47338;
+  border-right: solid 10px #b47338;
+  height: 6vw;
+  margin: 0 20%;
 }
