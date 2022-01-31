@@ -1,47 +1,38 @@
 @import 'global';
 
-
-
-
 #bar {
   align-items: center;
   background-color: #323232;
-  border-radius: 10px;
-  bottom: 50px;
+  border-radius: 1vw;
+  bottom: 4.5vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 50px;
   justify-items: center;
   left: 50%;
   padding: 1em;
   position: fixed;
-  transform: translate(-50%, 0); //this is to center, there's definitely a better way
-  width: 90vw; 
-} 
-
-$stats-red: #ff5630;
-$stats-orange: #ffab00;
-$stats-green: #36b37e;
-$stats-blue: #00b8d9;
+  transform: translate(-50%, 0);
+  width: 90vw;
+}
 
 .stats-display {
   margin: 0;
 }
 
 .stats-display:nth-child(1) {
-  color: $stats-red;
+  color: $red;
 }
 
-.stats-display:nth-child(2) { 
-  color: $stats-orange;
+.stats-display:nth-child(2) {
+  color: $orange;
 }
 
 .stats-display:nth-child(3) {
-  color: $stats-green;
+  color: $green;
 }
 
 .stats-display:nth-child(4) {
-  color: $stats-blue;
+  color: $blue;
 }
 
 .stats-value {

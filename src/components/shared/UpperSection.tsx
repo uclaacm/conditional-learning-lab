@@ -1,6 +1,8 @@
 import '../../styles/upperSection.scss';
 import { useLocation } from 'react-router-dom';
+import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
+
 
 interface upperSectionProps {
   onClick: (addBattery:number,addSpeed:number,addStrength:number,addHunger:number) => void;
@@ -18,7 +20,15 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   // Automatically finds nextPage to be used for ChoiceButton
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
 
+
   // Parameters for onClick are (addBattery, addSpeed, addHunger, addStrength)
+
+  //Lines of code (spaces indicate indentation, 4 spaces for each tab)
+
+  const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+
+  // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
+
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
   // NOTE: Switched the order of the first two in Figma because I felt that more variables would be
   // different, which would test them better when they re-do the learning lab.
@@ -41,6 +51,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,2,0)}/>
         </div>
       );
+
       break;
     case '/EasyIf':
       description = "You might be running low on battery! If you decide to keep moving, you'll keep your speed, but if you decide to charge your battery, \
@@ -104,8 +115,23 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   return (
     <div id="upper-section">
       <div id="description">{description}</div>
-      <div>
-        <div>code section</div>
+      <div id="upper-right">
+        <div className="hook"></div>
+        <div id="code">
+          {codeContent.map((item) =>{
+            let indents = 0;
+            for (let i = 0; i < item.length; i++){
+              if(item[i] == ' ') indents+=1;
+              else break;
+            }
+            // console.log(marginIndex)
+            return <SyntaxHighLighter  key={item} language="python" style={{marginLeft: indents}} useInlineStyles={false}>
+              {item}
+            </SyntaxHighLighter>;
+          },
+          )}
+        </div>
+
         {buttons}
       </div>
     </div>
