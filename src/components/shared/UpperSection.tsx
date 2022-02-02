@@ -28,23 +28,13 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
 
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
-
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
-  // NOTE: Switched the order of the first two in Figma because I felt that more variables would be
-  // different, which would test them better when they re-do the learning lab.
+
   switch (currentPage) {
     case '/':
-      description = "Welcome to the Conditional Learning Lab! Today, we'll learn about conditionals in Python! Conditionals are statements that run \
-      an action when true. We use conditionals when we want to perform actions, but only under certain circumstances! For example, you want to be able \
-      to reach the next stage in time, but you aren't sure if you will be fast enough. You don't want to speed up if you don't need to though, since \
-      that would take up more battery. Read the following line of code and see what you should do. Should you speed up or keep walking?";
-      // On click, increase certain parameters
-      // On every click, unless contradictory, increase hunger by 2 for the first two rounds and decrease battery by 1
-      // every round
-      // I was thinking of making speed decrease every time the user decides to do something other than keep moving.
-      // By doing so, it incentivizes them to maximize their speed. At the end of the game, their speed + strength
-      // should be their final score, and they can compare with their friends. Maybe have a leaderboard if we have time?
-      // This might not work because speed is randomly generated, but we can decide to not make that part random.
+      description = "Welcome to the Conditional Learning Lab! Today we'll learn about conditionals in Python! \
+      We use conditionals when we want to perform actions, but only under certain circumstances! Right now, you are \
+      low on energy. Should you fill up?";
       buttons = (
         <div>
           <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(-5,5,2,0)}/>
@@ -54,9 +44,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
 
       break;
     case '/EasyIf':
-      description = "You might be running low on battery! If you decide to keep moving, you'll keep your speed, but if you decide to charge your battery, \
-      you will lose speed! However, if you don't have enough battery, then you must recharge. Read the following code and check your stats to see if \
-      you need to fill up!";
+      description = "You want to be able reach the next stage in time, but you aren't sure if you will be fast enough. Read the following line of code \
+      and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div>
           <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,-2,2,0)}/>
@@ -85,10 +74,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       );
       break;
     case '/IfElif':
-      description = 'You just ran into your friend and they need help picking up some boxes. You want to help as much as you can, so you want to \
-      pick up the heaviest box you can. Which is the heaviest box can you pick up?';
-      // Changing stats isn't necessary for this round, but I'm increasing strength just in case we want
-      // to include it as part of final score
+      description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
       buttons = (
         <div>
           <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,0,2)}/>
