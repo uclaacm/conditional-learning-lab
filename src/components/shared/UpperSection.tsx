@@ -37,8 +37,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       low on energy. Should you fill up?";
       buttons = (
         <div>
-          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(-5,5,2,0)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,2,0)}/>
+          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,0,0,0)}/>
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
 
@@ -48,8 +48,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div>
-          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,-2,2,0)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-1,0,2,0)}/>
+          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(0,4,0,0)}/>
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
       break;
@@ -58,8 +58,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
        will waste time eating when you could be walking! Should you eat food?";
       buttons = (
         <div>
-          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,-2,-5,0)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,0,0,-3)}/>
+          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-2,0,0,0)}/>
         </div>
       );
       break;
@@ -68,8 +68,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       not fast enough, but you might not be strong enough to move the obstacle. What should your robot do?";
       buttons = (
         <div>
-          <ChoiceButton text="Go around" toPage={nextPage} onClick={() => props.onClick(0,1,0,0)}/>
-          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,-2,0,5)}/>
+          <ChoiceButton text="Go around" toPage={nextPage} onClick={() => props.onClick(-2,0,0,1)}/>
+          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,0,-2,0)}/>
         </div>
       );
       break;
@@ -77,9 +77,9 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
       buttons = (
         <div>
-          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,0,2)}/>
-          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,0,3)}/>
-          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,0,4)}/>
+          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,-1,0)}/>
+          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,-2,0)}/>
+          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,-3,0)}/>
         </div>
       );
       break;
