@@ -15,11 +15,12 @@ import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
 function App(): JSX.Element {
+  // Second arg for generateRandomInteger is possible increase from first, not the max value for integer
   const [playerStats, setPlayerStats] = useState<statsObject>({
-    battery: generateRandomInteger(1,10),
-    speed: generateRandomInteger(1,10),
-    hunger: generateRandomInteger(1,10),
-    strength: generateRandomInteger(1,10),
+    battery: generateRandomInteger(6,11), // MAX: 15
+    speed: generateRandomInteger(2,7),
+    hunger: generateRandomInteger(2,7),
+    strength: generateRandomInteger(7,12),
   });
 
   const onClick = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
