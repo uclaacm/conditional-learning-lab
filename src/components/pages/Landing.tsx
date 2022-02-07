@@ -7,7 +7,7 @@ export default function Landing(): JSX.Element {
   useEffect(() => {
     setTimeout(() => {
       setModalOpen(true);
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (

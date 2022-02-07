@@ -25,7 +25,7 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
     if (open) {
       setTimeout(() => {
         rewardRef.current?.rewardMe();
-      }, 100);
+      });
     }
   }, [open]);
 
@@ -58,6 +58,9 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
         <Reward
           ref={rewardRef}
           type='confetti'
+          config={{
+            lifetime: 125,
+          }}
         >
           <h1>
             Congratulations!
