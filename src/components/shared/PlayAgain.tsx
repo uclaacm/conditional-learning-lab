@@ -62,7 +62,7 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
             lifetime: 125,
           }}
         >
-          <h1>
+          <h1 className='modal-header'>
             Congratulations!
           </h1>
         </Reward>
@@ -74,8 +74,8 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
 
         <ChoiceButton
           text="Play Again"
-          toPage="/" //landing page, should take you here from last level
-          onClick={() => rewardRef.current?.rewardMe()}
+          toPage="/"
+          onClick={() => {/* redundant with toPage prop but still needed*/}}
         />
       </div>
     </Modal>
