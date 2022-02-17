@@ -1,34 +1,57 @@
 import '../../styles/upperSection.scss';
-import { useLocation } from 'react-router-dom';
+import { useAnimation, motion } from 'framer-motion';
+import { useHistory, useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
-
+import 'regenerator-runtime/runtime';
 
 interface upperSectionProps {
-  onClick: (addBattery:number,addSpeed:number,addStrength:number,addHunger:number) => void;
+  onClick: (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => void;
 }
 
 //UpperSection contains description, code and buttons
-export default function UpperSection(props:upperSectionProps): JSX.Element {
+export default function UpperSection(props: upperSectionProps): JSX.Element {
   let description;
   let buttons;
   //Stores types of pages that are moved through in nextPage
-  const pages = ['/', '/EasyIf','/HungerIfElse', '/ObstacleIfElse', '/IfElif', '/Nested'];
+  const pages = ['/', '/EasyIf', '/HungerIfElse', '/ObstacleIfElse', '/IfElif', '/Nested'];
   const location = useLocation();
   // Finds path name of file and also serves for nextPage
   const currentPage = location.pathname;
   // Automatically finds nextPage to be used for ChoiceButton
-  const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
+  const nextPage = pages.indexOf(currentPage) === pages.length - 1 ? '' : pages[pages.indexOf(currentPage) + 1];
 
 
   // Parameters for onClick are (addBattery, addSpeed, addHunger, addStrength)
 
   //Lines of code (spaces indicate indentation, 4 spaces for each tab)
 
-  const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+  const codeContent = ['if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
 
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
+
+  const controls = useAnimation();
+  const history = useHistory();
+
+  const choiceButtonClick = async (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
+    controls.start({
+      opacity: 0,
+      transition: { duration: 1 },
+    }).then(() => {
+      history.push(nextPage);
+      props.onClick(addBattery, addSpeed, addStrength, addHunger);
+      controls.start({
+        opacity: 1,
+        transition: { duration: 1 },
+      }).catch(err => {
+        console.error(err);
+      });
+    })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   switch (currentPage) {
     case '/':
@@ -37,8 +60,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       low on energy. Should you fill up?";
       buttons = (
         <div>
-          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,0,0,0)}/>
-          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => choiceButtonClick(5, 0, 0, 0)} />
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, 0, 0)} />
         </div>
       );
 
@@ -48,8 +71,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div>
-          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(0,4,0,0)}/>
-          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => choiceButtonClick(0, 4, 0, 0)} />
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, 0, 0)} />
         </div>
       );
       break;
@@ -58,8 +81,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
        will waste time eating when you could be walking! Should you eat food?";
       buttons = (
         <div>
-          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,0,0,-3)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-2,0,0,0)}/>
+          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, 0, -3)} />
+          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => choiceButtonClick(-2, 0, 0, 0)} />
         </div>
       );
       break;
@@ -68,8 +91,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       not fast enough, but you might not be strong enough to move the obstacle. What should your robot do?";
       buttons = (
         <div>
-          <ChoiceButton text="Go around" toPage={nextPage} onClick={() => props.onClick(-2,0,0,1)}/>
-          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,0,-2,0)}/>
+          <ChoiceButton text="Go around" toPage={nextPage} onClick={() => choiceButtonClick(-2, 0, 0, 1)} />
+          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => choiceButtonClick(-2, 0, -2, 0)} />
         </div>
       );
       break;
@@ -77,9 +100,9 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
       buttons = (
         <div>
-          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,-1,0)}/>
-          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,-2,0)}/>
-          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,-3,0)}/>
+          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, -1, 0)} />
+          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, -2, 0)} />
+          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, -3, 0)} />
         </div>
       );
       break;
@@ -88,9 +111,9 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       description = 'How heavy is the box you picked up?';
       buttons = (
         <div>
-          <ChoiceButton text="Not heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)} />
-          <ChoiceButton text="A bit heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)}/>
-          <ChoiceButton text="Very heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Not heavy" toPage='/Nested' onClick={() => choiceButtonClick(0, 0, 0, 0)} />
+          <ChoiceButton text="A bit heavy" toPage='/Nested' onClick={() => choiceButtonClick(0, 0, 0, 0)} />
+          <ChoiceButton text="Very heavy" toPage='/Nested' onClick={() => choiceButtonClick(0, 0, 0, 0)} />
         </div>
       );
       break;
@@ -99,27 +122,31 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   }
 
   return (
-    <div id="upper-section">
-      <div id="description">{description}</div>
-      <div id="upper-right">
-        <div className="hook"></div>
-        <div id="code">
-          {codeContent.map((item) =>{
-            let indents = 0;
-            for (let i = 0; i < item.length; i++){
-              if(item[i] == ' ') indents+=1;
-              else break;
-            }
-            // console.log(marginIndex)
-            return <SyntaxHighLighter  key={item} language="python" style={{marginLeft: indents}} useInlineStyles={false}>
-              {item}
-            </SyntaxHighLighter>;
-          },
-          )}
-        </div>
+    <motion.div
+      animate={controls}
+    >
+      <div id="upper-section">
+        <div id="description">{description}</div>
+        <div id="upper-right">
+          <div className="hook"></div>
+          <div id="code">
+            {codeContent.map((item) => {
+              let indents = 0;
+              for (let i = 0; i < item.length; i++) {
+                if (item[i] == ' ') indents += 1;
+                else break;
+              }
+              // console.log(marginIndex)
+              return <SyntaxHighLighter key={item} language="python" style={{ marginLeft: indents }} useInlineStyles={false}>
+                {item}
+              </SyntaxHighLighter>;
+            },
+            )}
+          </div>
 
-        {buttons}
+          {buttons}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
