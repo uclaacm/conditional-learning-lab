@@ -1,7 +1,11 @@
+import robot from '../../assets/robot.svg';
+
 function EasyIf(): JSX.Element {
   return (
     <div>
-      <div>Easy If-Statement Page</div>
+      <div className='illustration-left'>
+        <img style={{paddingLeft: '10vw'}} src={robot} alt="robot"></img>
+      </div>
     </div>
   );
 }

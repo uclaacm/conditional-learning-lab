@@ -19,10 +19,6 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
   const currentPage = location.pathname;
   // Automatically finds nextPage to be used for ChoiceButton
   const nextPage = pages.indexOf(currentPage) === pages.length-1 ? '' : pages[pages.indexOf(currentPage)+1];
-
-
-  // Parameters for onClick are (addBattery, addSpeed, addHunger, addStrength)
-
   //Lines of code (spaces indicate indentation, 4 spaces for each tab)
 
   const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
@@ -100,7 +96,10 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
 
   return (
     <div id="upper-section">
-      <div id="description">{description}</div>
+      <div id="upper-left">
+        <div id="description">{description}</div>
+      </div>
+
       <div id="upper-right">
         <div className="hook"></div>
         <div id="code">

@@ -1,0 +1,26 @@
+.illustration {
+  background-color: red;
+  // width: 60%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.illustration-left {
+  background-color: red;
+  display: flex;
+  width: 60%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#stacked {
+  position: relative;
+}
+
+.stacked-element {
+  left: 30%;
+  position: absolute;
+  top: 40%;
+}
