@@ -3,7 +3,6 @@ import { useAnimation, motion } from 'framer-motion';
 import { useHistory, useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
-import 'regenerator-runtime/runtime';
 
 interface upperSectionProps {
   onClick: (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => void;
@@ -34,7 +33,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
   const controls = useAnimation();
   const history = useHistory();
 
-  const choiceButtonClick = async (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
+  const choiceButtonClick = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
     controls.start({
       opacity: 0,
       transition: { duration: 1 },
