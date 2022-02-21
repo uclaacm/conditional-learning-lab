@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 interface statsProps {
   text: string;
   toPage: string;
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 
 export default function Stats(props:statsProps): JSX.Element {
