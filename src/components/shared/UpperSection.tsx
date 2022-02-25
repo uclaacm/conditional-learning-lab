@@ -12,6 +12,7 @@ interface upperSectionProps {
 export default function UpperSection(props:upperSectionProps): JSX.Element {
   let description;
   let buttons;
+  let codeContent = [''];
   //Stores types of pages that are moved through in nextPage
   const pages = ['/', '/EasyIf','/HungerIfElse', '/ObstacleIfElse', '/IfElif', '/Nested'];
   const location = useLocation();
@@ -25,7 +26,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
 
   //Lines of code (spaces indicate indentation, 4 spaces for each tab)
 
-  const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+  //const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
 
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
@@ -41,6 +42,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
+      codeContent = [ 'If your energy is lower than 5,', '    charge up at the station', '    and gain 5 battery!' ]
 
       break;
     case '/EasyIf':
@@ -52,6 +54,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
+      codeContent = [ 'if speed < 10:', '    speed_up()', '    speed += 4' ];
       break;
     case '/HungerIfElse':
       description = "You've been working hard! Now, you're getting hungry, but if you're not hungry enough, you'll be too full and you\
@@ -62,6 +65,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-2,0,0,0)}/>
         </div>
       );
+      codeContent = [ 'if hunger > 5:', '   eat()', '   hunger -= 2', 'else:', '   walk()', '   battery -= 2'];
       break;
     case '/ObstacleIfElse':
       description = "Oh no! There's an obstacle in the road! Going around the rock would take too much battery if you're \
@@ -72,6 +76,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,0,-2,0)}/>
         </div>
       );
+      codeContent = [ 'if speed > strength: ', '    go_around()', '    battery -= 2', '    hunger += 1', 'else:', '    move_obstacle()', '    battery -= 2', '    strength -= 2'];
       break;
     case '/IfElif':
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
@@ -82,6 +87,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,-3,0)}/>
         </div>
       );
+      codeContent = [ 'if strength > 8 and battery > 5:', '    carry(big_box)', '    strength -= 1', 'elif strength > 5 and battery > 3', '    carry(medium_box)', '    strength -= 2', 'else:', '    carry(small_box)', '    strength -= 3'];
       break;
     case '/Nested':
       // No stats should be changed for this round.
@@ -93,6 +99,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Very heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
+      codeContent = [ 'if strength < 5:', '    if strength < 3:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
       break;
     default:
       buttons = <div>Out of pages</div>;
