@@ -26,7 +26,8 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
 
   //Lines of code (spaces indicate indentation, 4 spaces for each tab)
 
-  //const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+  /*const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:',
+   '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];*/
 
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
@@ -42,7 +43,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
           <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
         </div>
       );
-      codeContent = [ 'If your energy is lower than 5,', '    charge up at the station', '    and gain 5 battery!' ]
+      codeContent = [ 'If your energy is lower than 5,', '    charge up at the station', '    and gain 5 battery!' ];
 
       break;
     case '/EasyIf':
