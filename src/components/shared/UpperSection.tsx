@@ -158,7 +158,7 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       );
       break;
     case '/IfElif':
-      description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
+      description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box you can pick up?';
       buttons = (
         <div>
           <ChoiceButton text="Small box" toPage={nextPage} onClick={(e) =>{
