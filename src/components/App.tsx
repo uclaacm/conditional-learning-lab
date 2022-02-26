@@ -35,7 +35,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <div id="app-wrapper">
-        <UpperSection onClick={onClick}/>
+        <UpperSection onClick={onClick} playerStats={playerStats} />
         <Switch>
           <Route exact path ="/"><Landing/></Route>
           <Route exact path ="/easyif"><EasyIf/></Route>

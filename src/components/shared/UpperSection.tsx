@@ -1,15 +1,27 @@
 import '../../styles/upperSection.scss';
+import React from 'react';
+import Reward, { RewardElement } from 'react-rewards';
 import { useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
+import {statsObject} from '../../common/types';
 import ChoiceButton from './ChoiceButton';
 
 
 interface upperSectionProps {
   onClick: (addBattery:number,addSpeed:number,addStrength:number,addHunger:number) => void;
+  playerStats: statsObject;
 }
 
 //UpperSection contains description, code and buttons
 export default function UpperSection(props:upperSectionProps): JSX.Element {
+  const { playerStats } = props;
+
+  const battery: number = playerStats.battery;
+  const speed: number = playerStats.speed;
+  const hunger: number = playerStats.hunger;
+  const strength: number = playerStats.strength;
+
+  const rewardRef = React.useRef<RewardElement>(null);
   let description;
   let buttons;
   //Stores types of pages that are moved through in nextPage
@@ -37,8 +49,26 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       low on energy. Should you fill up?";
       buttons = (
         <div>
-          <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => props.onClick(5,0,0,0)}/>
-          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Charge up" toPage={nextPage} onClick={(e) =>{
+            if (battery < 5){
+              props.onClick(5,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={(e) => {
+            if (battery < 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+          }}/>
         </div>
       );
 
@@ -48,8 +78,26 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div>
-          <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => props.onClick(0,4,0,0)}/>
-          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Speed up" toPage={nextPage} onClick={(e) => {
+            if (speed < 4){
+              props.onClick(0,4,0,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Do nothing" toPage={nextPage} onClick={(e) => {
+            if (speed < 4){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+          }}/>
         </div>
       );
       break;
@@ -58,8 +106,26 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
        will waste time eating when you could be walking! Should you eat food?";
       buttons = (
         <div>
-          <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => props.onClick(0,0,0,-3)}/>
-          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={() => props.onClick(-2,0,0,0)}/>
+          <ChoiceButton text="Eat food" toPage={nextPage} onClick={(e) => {
+            if (hunger > 5){
+              props.onClick(0,0,-2,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Keep walking" toPage={nextPage} onClick={(e) => {
+            if (hunger > 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+          }}/>
         </div>
       );
       break;
@@ -68,8 +134,26 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       not fast enough, but you might not be strong enough to move the obstacle. What should your robot do?";
       buttons = (
         <div>
-          <ChoiceButton text="Go around" toPage={nextPage} onClick={() => props.onClick(-2,0,0,1)}/>
-          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={() => props.onClick(-2,0,-2,0)}/>
+          <ChoiceButton text="Go around" toPage={nextPage} onClick={(e) => {
+            if (speed > strength){
+              props.onClick(-2,0,1,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Move obstacle" toPage={nextPage} onClick={(e) =>{
+            if (speed > strength){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(-2, 0,-2,0);
+              rewardRef.current?.rewardMe();
+            }
+          }}/>
         </div>
       );
       break;
@@ -77,9 +161,48 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box you can pick up?';
       buttons = (
         <div>
-          <ChoiceButton text="Small box" toPage={nextPage} onClick={() => props.onClick(0,0,-1,0)}/>
-          <ChoiceButton text="Medium box" toPage={nextPage} onClick={() => props.onClick(0,0,-2,0)}/>
-          <ChoiceButton text="Big box" toPage={nextPage} onClick={() => props.onClick(0,0,-3,0)}/>
+          <ChoiceButton text="Small box" toPage={nextPage} onClick={(e) =>{
+            if (strength > 8 && battery > 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else if (strength > 5 && battery > 3){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(0, 0, -3,0);
+              rewardRef.current?.rewardMe();
+            }
+          }}/>
+          <ChoiceButton text="Medium box" toPage={nextPage} onClick={(e) =>{
+            if (strength > 8 && battery > 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else if (strength > 5 && battery > 3){
+              props.onClick(0,0,-2,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Big box" toPage={nextPage} onClick={(e) =>{
+            if (strength > 8 && battery > 5){
+              props.onClick(0,0,-1,0);
+              rewardRef.current?.punishMe();
+            }
+            else if (strength > 5 && battery > 3){
+              e.preventDefault();
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
         </div>
       );
       break;
@@ -88,9 +211,48 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       description = 'How heavy is the box you picked up?';
       buttons = (
         <div>
-          <ChoiceButton text="Not heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)} />
-          <ChoiceButton text="A bit heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)}/>
-          <ChoiceButton text="Very heavy" toPage='/Nested' onClick={() => props.onClick(0,0,0,0)}/>
+          <ChoiceButton text="Not heavy" toPage='/Nested' onClick={(e) =>{
+            if (strength < 3){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else if(strength >= 3 && strength <= 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+          }} />
+          <ChoiceButton text="A bit heavy" toPage='/Nested' onClick={(e)=>{
+            if (strength < 3){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else if(strength >= 3 && strength <= 5){
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
+          <ChoiceButton text="Very heavy" toPage='/Nested' onClick={(e) =>{
+            if (strength < 3){
+              props.onClick(0,0,0,0);
+              rewardRef.current?.rewardMe();
+            }
+            else if(strength >= 3 && strength <= 5){
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+            else{
+              e.preventDefault();
+              rewardRef.current?.punishMe();
+            }
+          }}/>
         </div>
       );
       break;
@@ -98,8 +260,24 @@ export default function UpperSection(props:upperSectionProps): JSX.Element {
       buttons = <div>Out of pages</div>;
   }
 
+
   return (
     <div id="upper-section">
+      <div id="reward-container" style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+      }}>
+        <Reward
+          ref={rewardRef}
+          type='confetti'
+          config={{
+            lifetime: 1500,
+          }}
+        >
+        </Reward>
+      </div>
       <div id="description">{description}</div>
       <div id="upper-right">
         <div className="hook"></div>
