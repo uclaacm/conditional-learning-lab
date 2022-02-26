@@ -1,10 +1,12 @@
-import '../../styles/upperSection.scss';
 import { useAnimation, motion } from 'framer-motion';
+import { useEffect } from 'react';
+import '../../styles/upperSection.scss';
 import { useHistory, useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
 
 interface upperSectionProps {
+  startExitAnimation: () => void,
   onClick: (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => void;
 }
 
@@ -34,6 +36,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
   const history = useHistory();
 
   const choiceButtonClick = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
+    props.startExitAnimation();
     controls.start({
       opacity: 0,
       transition: { duration: 1 },
@@ -43,14 +46,17 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       controls.start({
         opacity: 1,
         transition: { duration: 1 },
-      }).catch(err => {
-        console.error(err);
-      });
-    })
-      .catch(err => {
-        console.error(err);
-      });
+      }).catch(err => console.error(err));
+    }).catch(err => console.error(err));
   };
+
+  // useEffect hook to animate opacity upon first opening the page
+  useEffect(() => {
+    controls.start({
+      opacity: 1,
+      transition: { duration: 1 },
+    }).catch(err => console.error(err));
+  }, []);
 
   switch (currentPage) {
     case '/':
@@ -122,6 +128,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
       animate={controls}
     >
       <div id="upper-section">
