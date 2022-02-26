@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import '../../styles/playAgain.scss';
 import Reward, { RewardElement } from 'react-rewards';
-import ChoiceButton from './ChoiceButton';
+import {Link} from 'react-router-dom';
 
 
 interface PlayAgainProps {
@@ -72,11 +72,9 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
           Would you like to play again?
         </p>
 
-        <ChoiceButton
-          text="Play Again"
-          toPage="/"
-          onClick={() => {/* redundant with toPage prop but still needed*/}}
-        />
+        <Link to={'/'}>
+          <button className="choice-button">Play Again</button>
+        </Link>
       </div>
     </Modal>
   );

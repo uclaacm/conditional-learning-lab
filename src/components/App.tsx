@@ -17,13 +17,13 @@ import '../assets/WestwoodSans-Regular.ttf';
 function App(): JSX.Element {
   // Second arg for generateRandomInteger is possible increase from first, not the max value for integer
   const [playerStats, setPlayerStats] = useState<statsObject>({
-    battery: generateRandomInteger(6,11), // MAX: 15
+    battery: generateRandomInteger(3,11),
     speed: generateRandomInteger(2,7),
     hunger: generateRandomInteger(2,7),
     strength: generateRandomInteger(7,12),
   });
 
-  const onClick = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
+  const handleStatChange = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
     setPlayerStats({
       battery: playerStats.battery + addBattery,
       speed: playerStats.speed + addSpeed,
@@ -35,7 +35,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <div id="app-wrapper">
-        <UpperSection onClick={onClick}/>
+        <UpperSection statAction={handleStatChange} playerStats={playerStats} />
         <Switch>
           <Route exact path ="/"><Landing/></Route>
           <Route exact path ="/easyif"><EasyIf/></Route>
