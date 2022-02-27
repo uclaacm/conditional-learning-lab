@@ -18,9 +18,9 @@ function App(): JSX.Element {
   // Second arg for generateRandomInteger is possible increase from first, not the max value for integer
   const [playerStats, setPlayerStats] = useState<statsObject>({
     battery: generateRandomInteger(3,11),
-    speed: generateRandomInteger(2,7),
+    speed: generateRandomInteger(4,10),
     hunger: generateRandomInteger(2,7),
-    strength: generateRandomInteger(7,12),
+    strength: generateRandomInteger(7,11),
   });
 
   const handleStatChange = (addBattery:number, addSpeed:number, addStrength:number, addHunger:number) => {
