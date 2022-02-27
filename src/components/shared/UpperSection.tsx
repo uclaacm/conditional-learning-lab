@@ -33,9 +33,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
 
   //Lines of code (spaces indicate indentation, 4 spaces for each tab)
 
-  /*const codeContent = [ 'if weight < 5:', '    if weight < 7:', '        print("Very heavy!")', '    else:',
-   '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];*/
-
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
 
@@ -50,7 +47,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
           <ChoiceButton text="Do nothing" toPage={nextPage} correctLogic={battery >= 5} correctAction={() => props.statAction(0, 0, 0, 0)} />
         </div>
       );
-      codeContent = ['If your energy is lower than 5,', '    charge up at the station', '    and gain 5 battery!'];
+      codeContent = ['If your battery is lower than 5,', 'charge up at the station', 'and gain 5 battery!'];
 
       break;
     case '/EasyIf':
@@ -58,11 +55,11 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div className='buttons'>
-          <ChoiceButton text="Speed up" toPage={nextPage} correctLogic={speed < 4} correctAction={() => props.statAction(0, 4, 0, 0)} />
-          <ChoiceButton text="Do nothing" toPage={nextPage} correctLogic={battery >= 4} correctAction={() => props.statAction(0, 0, 0, 0)} />
+          <ChoiceButton text="Speed up" toPage={nextPage} correctLogic={speed < 7} correctAction={() => props.statAction(0, 4, 0, 0)} />
+          <ChoiceButton text="Do nothing" toPage={nextPage} correctLogic={battery >= 7} correctAction={() => props.statAction(0, 0, 0, 0)} />
         </div>
       );
-      codeContent =['if speed < 10:', '    speed_up()', '    speed += 4'];
+      codeContent = ['if speed < 7:', '    speed_up()', '    speed += 4'];
       break;
     case '/HungerIfElse':
       description = "You've been working hard! Now, you're getting hungry, but if you're not hungry enough, you'll be too full and you\
@@ -73,7 +70,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
           <ChoiceButton text="Keep walking" toPage={nextPage} correctLogic={hunger <= 5} correctAction={() => props.statAction(-2, 0, 0, 0)} />
         </div>
       );
-      codeContent = ['if hunger > 5:', '    eat()', '    hunger -= 2', 'else:', '    walk()', '    battery-=2'];
+      codeContent = ['if hunger > 5:', '    eat_food()', '    hunger -= 2', 'else:', '    keep_walking()', '    battery -= 2'];
       break;
     case '/ObstacleIfElse':
       description = "Oh no! There's an obstacle in the road! Going around the rock would take too much battery if you're \
@@ -84,7 +81,7 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
           <ChoiceButton text="Move obstacle" toPage={nextPage} correctLogic={speed <= strength} correctAction={() => props.statAction(-2, 0, -2, 0)} />
         </div>
       );
-      codeContent = ['if speed > strength:', '    go_around()', '    battery -= 2', '    hunger += 1', 'else:', '    move_obstable()', '    battery -= 2', '    strength -= 2'];
+      codeContent = ['if speed > strength:', '    go_around()', '    battery -= 2', '    hunger += 1', 'else:', '    move_obstacle()', '    battery -= 2', '    strength -= 2'];
       break;
     case '/IfElif':
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box you can pick up?';
@@ -95,19 +92,19 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
           <ChoiceButton text="Big box" toPage={nextPage} correctLogic={strength > 8 && battery > 5} correctAction={() => props.statAction(0, 0, -3, 0)} />
         </div>
       );
-      codeContent = ['if strength > 8 and battery > 5:', '    carry(big_box)', '    strength -= 1', 'elif strength > 5 and battery > 3', '    carry(medium_box)', '    strength -= 2', 'else:', '    carry(small_box)', '    strength -= 3'];
+      codeContent = ['if strength > 8 and battery > 5:', '    carry(big_box)', '    strength -= 3', 'elif strength > 5 and battery > 3', '    carry(medium_box)', '    strength -= 2', 'else:', '    carry(small_box)', '    strength -= 1'];
       break;
     case '/Nested':
       // No stats should be changed for this round.
-      description = 'How heavy is the box you picked up?';
+      description = "We're finally done! How tired are you now?";
       buttons = (
         <div className='buttons'>
-          <ChoiceButton text="Not heavy at all!" toPage={'/Nested'} correctLogic={strength >= 7} correctAction={() => props.statAction(0, 0, 0, 0)} />
-          <ChoiceButton text="A bit heavy" toPage={'/Nested'} correctLogic={strength >= 5 && strength < 7} correctAction={() => props.statAction(0, 0, 0, 0)} />
-          <ChoiceButton text="Very heavy" toPage={'/Nested'} correctLogic={strength < 5} correctAction={() => props.statAction(0, 0, 0, 0)} />
+          <ChoiceButton text="Not tired at all!" toPage={'/Nested'} correctLogic={strength >= 7} correctAction={() => props.statAction(0, 0, 0, 0)} />
+          <ChoiceButton text="A bit tired" toPage={'/Nested'} correctLogic={strength >= 5 && strength < 7} correctAction={() => props.statAction(0, 0, 0, 0)} />
+          <ChoiceButton text="Very tired" toPage={'/Nested'} correctLogic={strength < 5} correctAction={() => props.statAction(0, 0, 0, 0)} />
         </div>
       );
-      codeContent = ['if strength < 5:', '    if strength < 3:', '        print("Very heavy!")', '    else:', '        print("A bit heavy!")', 'else:', '    print("Not heavy at all!")'];
+      codeContent = ['if strength < 7:', '    if strength < 5:', '        print("Very tired!")', '    else:', '        print("A bit tired!")', 'else:', '    print("Not tired at all!")'];
       break;
     default:
       buttons = <div>Out of pages</div>;
@@ -126,14 +123,19 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       <div id="upper-right">
         <div className="hook"></div>
         <div id="code">
-          {codeContent.map((item, idx) =>{
+          {codeContent.map((item, idx) => {
             let indents = 0;
             for (let i = 0; i < item.length; i++) {
               if (item[i] == ' ') indents += 1;
               else break;
             }
             // console.log(marginIndex)
-            return <SyntaxHighLighter  key={idx} language="python" style={{marginLeft: indents}} useInlineStyles={false}>
+            return <SyntaxHighLighter
+              key={idx}
+              language={currentPage === '/' ? 'plaintext' : 'python'} //first page isn't code
+              style={{ marginLeft: indents }}
+              useInlineStyles={false}
+            >
               {item}
             </SyntaxHighLighter>;
           },
