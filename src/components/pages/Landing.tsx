@@ -5,7 +5,7 @@ import robot from '../../assets/robot.svg';
 export default function Landing(): JSX.Element {
   return (
     <div className='illustration'>
-      <img src={robot} alt="robot"></img>
+      <img src={robot} className="robot" alt="robot"></img>
       <img src={charger} alt="charger"></img>
     </div>
   );

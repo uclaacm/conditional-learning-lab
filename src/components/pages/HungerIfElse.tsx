@@ -5,8 +5,8 @@ import robot from '../../assets/robot.svg';
 function HungerIfElse(): JSX.Element {
   return (
     <div className='illustration'>
-      <img src={robot} alt="robot"></img>
-      <img src={chicken} alt="chicken"></img>
+      <img src={robot} className="robot" alt="robot"></img>
+      <img src={chicken} id="chicken" alt="chicken"></img>
     </div>
   );
 }

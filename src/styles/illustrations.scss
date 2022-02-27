@@ -1,15 +1,35 @@
 .illustration {
-  background-color: red;
-  // width: 60%;
+  align-items: flex-end;
+  // background-color: red;
   display: flex;
   justify-content: space-around;
+  margin-bottom: -20px;
 }
 
 .illustration-left {
-  background-color: red;
+  // background-color: red;
   display: flex;
-  width: 60%;
+  margin-bottom: -20px;
 }
+
+.robot {
+  height: calc(100px + 6vw);
+}
+
+#chicken {
+  height: calc(50px + 6vw);
+  margin-bottom: 20px;
+}
+
+#boulder {
+  margin-bottom: -20px;
+}
+
+.box {
+  margin-bottom: -20px;
+}
+
+// boxes
 
 .hidden {
   visibility: hidden;

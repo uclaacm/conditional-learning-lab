@@ -10,13 +10,13 @@ function Nested(): JSX.Element {
     <div>
       <div className='illustration'>
         <div id="stacked">
-          <img src={robot} alt="robot"></img>
-          <img className="stacked-element" src={mediumbox} alt="mediumbox"></img>
+          <img src={robot} className="robot" alt="robot"></img>
+          <img className="stacked-element box" src={mediumbox} alt="mediumbox"></img>
         </div>
         <div id="boxes">
-          <img src={smallbox} alt="smallbox"></img>
-          <img className="hidden" src={mediumbox} alt="mediumbox"></img>
-          <img src={largebox} alt="largebox"></img>
+          <img src={smallbox} className="box" alt="smallbox"></img>
+          <img className="hidden box" src={mediumbox} alt="mediumbox"></img>
+          <img src={largebox} className="box" alt="largebox"></img>
         </div>
       </div>
     </div>
