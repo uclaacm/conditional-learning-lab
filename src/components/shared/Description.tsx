@@ -29,7 +29,7 @@ export default function Description():JSX.Element {
       description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box you can pick up?';
       break;
     case '/Nested':
-      description = 'How heavy is the box you picked up?';
+      description = "We're finally done! How tired are you now?";
       break;
   }
   return (

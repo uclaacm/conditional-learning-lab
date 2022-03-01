@@ -15,17 +15,18 @@ import Footer from './shared/Footer';
 import Stats from './shared/Stats';
 import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
+import PlayAgain from './shared/PlayAgain';
 
 function App(): JSX.Element {
   // Second arg for generateRandomInteger is possible increase from first, not the max value for integer
   const [playerStats, setPlayerStats] = useState<statsObject>({
-    battery: generateRandomInteger(6, 11), // MAX: 15
-    speed: generateRandomInteger(2, 7),
+    battery: generateRandomInteger(3, 11),
+    speed: generateRandomInteger(4, 10),
     hunger: generateRandomInteger(2, 7),
-    strength: generateRandomInteger(7, 12),
+    strength: generateRandomInteger(7, 11),
   });
 
-  const onClick = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
+  const handleStatChange = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
     setPlayerStats({
       battery: playerStats.battery + addBattery,
       speed: playerStats.speed + addSpeed,
@@ -36,6 +37,8 @@ function App(): JSX.Element {
 
   const controls = useAnimation();
   const history = useHistory();
+
+  const [playAgainOpen, setPlayAgainOpen] = useState(false);
 
   const exitAnimation = (nextPage: string) => {
     controls.start({
@@ -62,7 +65,12 @@ function App(): JSX.Element {
       <motion.div initial={{ opacity: 0 }} animate={controls}>
         <div id="upper">
           <Description />
-          <CodeSection startExitAnimation={exitAnimation} onClick={onClick} />
+          <CodeSection
+            startExitAnimation={exitAnimation}
+            statAction={handleStatChange}
+            playerStats={playerStats}
+            openPlayAgain={() => setPlayAgainOpen(true)}
+          />
         </div>
       </motion.div>
       <motion.div initial={{ opacity: 0 }} animate={controls}>
@@ -75,6 +83,7 @@ function App(): JSX.Element {
           <Route exact path="/nested"><Nested /></Route>
         </Switch>
       </motion.div>
+      <PlayAgain modalOpen={playAgainOpen} closeAction={() => setPlayAgainOpen(false)} />
       <Stats playerStats={playerStats} />
       <Footer />
     </div >
