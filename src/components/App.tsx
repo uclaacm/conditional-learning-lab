@@ -12,10 +12,10 @@ import ObstacleIfElse from './pages/ObstacleIfElse';
 import CodeSection from './shared/CodeSection';
 import Description from './shared/Description';
 import Footer from './shared/Footer';
+import PlayAgain from './shared/PlayAgain';
 import Stats from './shared/Stats';
 import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
-import PlayAgain from './shared/PlayAgain';
 
 function App(): JSX.Element {
   // Second arg for generateRandomInteger is possible increase from first, not the max value for integer

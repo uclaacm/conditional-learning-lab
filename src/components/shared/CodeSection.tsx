@@ -1,8 +1,8 @@
 import '../../styles/codeSection.scss';
 import { useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
-import ChoiceButton from './ChoiceButton';
 import { statsObject } from '../../common/types';
+import ChoiceButton from './ChoiceButton';
 
 interface CodeSectionProps {
   startExitAnimation: (nextPage: string) => void,
@@ -117,7 +117,7 @@ export default function CodeSection(props: CodeSectionProps): JSX.Element {
           return (
             <SyntaxHighLighter
               key={index}
-              language={currentPage === '/' ? "plaintext" : "python"}
+              language={currentPage === '/' ? 'plaintext' : 'python'}
               style={{ marginLeft: indents }}
               useInlineStyles={false}
             >
