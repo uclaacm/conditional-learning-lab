@@ -1,18 +1,14 @@
-import { useAnimation, motion } from 'framer-motion';
-import { useEffect } from 'react';
-import '../../styles/upperSection.scss';
-import { useHistory, useLocation } from 'react-router-dom';
+import '../../styles/codeSection.scss';
+import { useLocation } from 'react-router-dom';
 import SyntaxHighLighter from 'react-syntax-highlighter';
 import ChoiceButton from './ChoiceButton';
 
 interface upperSectionProps {
-  startExitAnimation: () => void,
+  startExitAnimation: (nextPage: string) => void,
   onClick: (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => void;
 }
 
-//UpperSection contains description, code and buttons
 export default function UpperSection(props: upperSectionProps): JSX.Element {
-  let description;
   let buttons;
   //Stores types of pages that are moved through in nextPage
   const pages = ['/', '/EasyIf', '/HungerIfElse', '/ObstacleIfElse', '/IfElif', '/Nested'];
@@ -32,37 +28,13 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
   // Once clicked, certain stats are increased in value, depending on our specific needs for that page
 
-  const controls = useAnimation();
-  const history = useHistory();
-
   const choiceButtonClick = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
-    props.startExitAnimation();
-    controls.start({
-      opacity: 0,
-      transition: { duration: 1 },
-    }).then(() => {
-      history.push(nextPage);
-      props.onClick(addBattery, addSpeed, addStrength, addHunger);
-      controls.start({
-        opacity: 1,
-        transition: { duration: 1 },
-      }).catch(err => console.error(err));
-    }).catch(err => console.error(err));
+    props.startExitAnimation(nextPage);
+    props.onClick(addBattery, addSpeed, addStrength, addHunger);
   };
-
-  // useEffect hook to animate opacity upon first opening the page
-  useEffect(() => {
-    controls.start({
-      opacity: 1,
-      transition: { duration: 1 },
-    }).catch(err => console.error(err));
-  }, []);
 
   switch (currentPage) {
     case '/':
-      description = "Welcome to the Conditional Learning Lab! Today we'll learn about conditionals in Python! \
-      We use conditionals when we want to perform actions, but only under certain circumstances! Right now, you are \
-      low on energy. Should you fill up?";
       buttons = (
         <div>
           <ChoiceButton text="Charge up" toPage={nextPage} onClick={() => choiceButtonClick(5, 0, 0, 0)} />
@@ -72,8 +44,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
 
       break;
     case '/EasyIf':
-      description = "You want to be able reach the next stage in time, but you aren't sure if you will be fast enough. Read the following line of code \
-      and see what you should do. Should you speed up or keep walking?";
       buttons = (
         <div>
           <ChoiceButton text="Speed up" toPage={nextPage} onClick={() => choiceButtonClick(0, 4, 0, 0)} />
@@ -82,8 +52,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       );
       break;
     case '/HungerIfElse':
-      description = "You've been working hard! Now, you're getting hungry, but if you're not hungry enough, you'll be too full and you\
-       will waste time eating when you could be walking! Should you eat food?";
       buttons = (
         <div>
           <ChoiceButton text="Eat food" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, 0, -3)} />
@@ -92,8 +60,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       );
       break;
     case '/ObstacleIfElse':
-      description = "Oh no! There's an obstacle in the road! Going around the rock would take too much battery if you're \
-      not fast enough, but you might not be strong enough to move the obstacle. What should your robot do?";
       buttons = (
         <div>
           <ChoiceButton text="Go around" toPage={nextPage} onClick={() => choiceButtonClick(-2, 0, 0, 1)} />
@@ -102,7 +68,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       );
       break;
     case '/IfElif':
-      description = 'You just ran into your friend and they need help picking up some boxes. Which is the heaviest box can you pick up?';
       buttons = (
         <div>
           <ChoiceButton text="Small box" toPage={nextPage} onClick={() => choiceButtonClick(0, 0, -1, 0)} />
@@ -113,7 +78,6 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
       break;
     case '/Nested':
       // No stats should be changed for this round.
-      description = 'How heavy is the box you picked up?';
       buttons = (
         <div>
           <ChoiceButton text="Not heavy" toPage='/Nested' onClick={() => choiceButtonClick(0, 0, 0, 0)} />
@@ -127,32 +91,23 @@ export default function UpperSection(props: upperSectionProps): JSX.Element {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={controls}
-    >
-      <div id="upper-section">
-        <div id="description">{description}</div>
-        <div id="upper-right">
-          <div className="hook"></div>
-          <div id="code">
-            {codeContent.map((item) => {
-              let indents = 0;
-              for (let i = 0; i < item.length; i++) {
-                if (item[i] == ' ') indents += 1;
-                else break;
-              }
-              // console.log(marginIndex)
-              return <SyntaxHighLighter key={item} language="python" style={{ marginLeft: indents }} useInlineStyles={false}>
-                {item}
-              </SyntaxHighLighter>;
-            },
-            )}
-          </div>
-
-          {buttons}
-        </div>
+    <div>
+      <div className="hook"></div>
+      <div id="code">
+        {codeContent.map((item) => {
+          let indents = 0;
+          for (let i = 0; i < item.length; i++) {
+            if (item[i] == ' ') indents += 1;
+            else break;
+          }
+          // console.log(marginIndex)
+          return <SyntaxHighLighter key={item} language="python" style={{ marginLeft: indents }} useInlineStyles={false}>
+            {item}
+          </SyntaxHighLighter>;
+        },
+        )}
       </div>
-    </motion.div>
+      {buttons}
+    </div>
   );
 }

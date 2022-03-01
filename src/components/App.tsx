@@ -1,6 +1,6 @@
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { generateRandomInteger } from '../common/math';
 import { statsObject } from '../common/types';
 import EasyIf from './pages/EasyIf';
@@ -9,9 +9,10 @@ import IfElif from './pages/IfElif';
 import Landing from './pages/Landing';
 import Nested from './pages/Nested';
 import ObstacleIfElse from './pages/ObstacleIfElse';
+import CodeSection from './shared/CodeSection';
+import Description from './shared/Description';
 import Footer from './shared/Footer';
 import Stats from './shared/Stats';
-import UpperSection from './shared/UpperSection';
 import '../styles/app.scss';
 import '../assets/WestwoodSans-Regular.ttf';
 
@@ -34,12 +35,14 @@ function App(): JSX.Element {
   };
 
   const controls = useAnimation();
+  const history = useHistory();
 
-  const exitAnimation = () => {
+  const exitAnimation = (nextPage: string) => {
     controls.start({
       opacity: 0,
       transition: { duration: 1 },
     }).then(() => {
+      history.push(nextPage);
       controls.start({
         opacity: 1,
         transition: { duration: 1 },
@@ -55,23 +58,26 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <Router>
-      <div id="app-wrapper">
-        <UpperSection startExitAnimation={exitAnimation} onClick={onClick} />
-        <motion.div initial={{ opacity: 0 }} animate={controls}>
-          <Switch>
-            <Route exact path="/"><Landing /></Route>
-            <Route exact path="/easyif"><EasyIf /></Route>
-            <Route exact path="/hungerifelse"><HungerIfElse /></Route>
-            <Route exact path="/obstacleifelse"><ObstacleIfElse /></Route>
-            <Route exact path="/ifelif"><IfElif /></Route>
-            <Route exact path="/nested"><Nested /></Route>
-          </Switch>
-        </motion.div>
-        <Stats playerStats={playerStats} />
-        <Footer />
-      </div>
-    </Router>
+    <div id="app-wrapper">
+      <motion.div initial={{ opacity: 0 }} animate={controls}>
+        <div id="upper">
+          <Description />
+          <CodeSection startExitAnimation={exitAnimation} onClick={onClick} />
+        </div>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} animate={controls}>
+        <Switch>
+          <Route exact path="/"><Landing /></Route>
+          <Route exact path="/easyif"><EasyIf /></Route>
+          <Route exact path="/hungerifelse"><HungerIfElse /></Route>
+          <Route exact path="/obstacleifelse"><ObstacleIfElse /></Route>
+          <Route exact path="/ifelif"><IfElif /></Route>
+          <Route exact path="/nested"><Nested /></Route>
+        </Switch>
+      </motion.div>
+      <Stats playerStats={playerStats} />
+      <Footer />
+    </div >
   );
 }
 
