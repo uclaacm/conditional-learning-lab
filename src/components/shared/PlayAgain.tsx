@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import '../../styles/playAgain.scss';
 import Reward, { RewardElement } from 'react-rewards';
-import ChoiceButton from './ChoiceButton';
+import {Link} from 'react-router-dom';
 
 
 interface PlayAgainProps {
   modalOpen: boolean,
+  closeAction: () => void
 }
 
 
 export default function PlayAgain(props: PlayAgainProps): JSX.Element {
-  const { modalOpen } = props;
-
-  const [open, setOpen] = useState(modalOpen);
 
   const rewardRef = React.useRef<RewardElement>(null);
 
   useEffect(() => {
-    setOpen(modalOpen);
-  }, [modalOpen]);
-
-  useEffect(() => {
-    if (open) {
+    if (props.modalOpen) {
       setTimeout(() => {
         rewardRef.current?.rewardMe();
       });
     }
-  }, [open]);
+  }, [props.modalOpen]);
 
   return (
     <Modal
@@ -52,7 +46,8 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
           borderRadius: '1em',
         },
       }}
-      isOpen={open}
+      ariaHideApp={false}
+      isOpen={props.modalOpen}
     >
       <div className="modal-content">
         <Reward
@@ -72,11 +67,9 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
           Would you like to play again?
         </p>
 
-        <ChoiceButton
-          text="Play Again"
-          toPage="/"
-          onClick={() => {/* redundant with toPage prop but still needed*/}}
-        />
+        <Link to={'/'}>
+          <button className="choice-button" onClick={() => props.closeAction()}>Play Again</button>
+        </Link>
       </div>
     </Modal>
   );
