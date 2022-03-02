@@ -62,31 +62,33 @@ function App(): JSX.Element {
 
   return (
     <div id="app-wrapper">
-      <motion.div initial={{ opacity: 0 }} animate={controls}>
-        <div id="upper">
+      <div id="main-section">
+        <motion.div initial={{ opacity: 0 }} animate={controls} id="left">
           <Description />
+          <Switch>
+            <Route exact path="/"><Landing /></Route>
+            <Route exact path="/easyif"><EasyIf /></Route>
+            <Route exact path="/hungerifelse"><HungerIfElse /></Route>
+            <Route exact path="/obstacleifelse"><ObstacleIfElse /></Route>
+            <Route exact path="/ifelif"><IfElif /></Route>
+            <Route exact path="/nested"><Nested /></Route>
+          </Switch>
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} animate={controls}>
           <CodeSection
             startExitAnimation={exitAnimation}
             statAction={handleStatChange}
             playerStats={playerStats}
             openPlayAgain={() => setPlayAgainOpen(true)}
           />
-        </div>
-      </motion.div>
-      <motion.div initial={{ opacity: 0 }} animate={controls}>
-        <Switch>
-          <Route exact path="/"><Landing /></Route>
-          <Route exact path="/easyif"><EasyIf /></Route>
-          <Route exact path="/hungerifelse"><HungerIfElse /></Route>
-          <Route exact path="/obstacleifelse"><ObstacleIfElse /></Route>
-          <Route exact path="/ifelif"><IfElif /></Route>
-          <Route exact path="/nested"><Nested /></Route>
-        </Switch>
-      </motion.div>
-      <PlayAgain modalOpen={playAgainOpen} closeAction={() => setPlayAgainOpen(false)} />
-      <Stats playerStats={playerStats} />
-      <Footer />
-    </div >
+        </motion.div>
+      </div>
+      <div id="bottom-section">
+        <PlayAgain modalOpen={playAgainOpen} closeAction={() => setPlayAgainOpen(false)} />
+        <Stats playerStats={playerStats} />
+        <Footer />
+      </div>
+    </div>
   );
 }
 
