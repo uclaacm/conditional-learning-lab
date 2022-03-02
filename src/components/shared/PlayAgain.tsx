@@ -27,6 +27,7 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
     <Modal
       style={{
         overlay: {
+          zIndex:99,
           position: 'fixed',
           top: 0,
           left: 0,
