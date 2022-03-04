@@ -64,7 +64,7 @@ export default function PlayAgain(props: PlayAgainProps): JSX.Element {
         </Reward>
 
         <p>
-          You have successfully completed the lab! <br />
+          You have successfully completed IfBots! <br />
           Would you like to play again?
         </p>
 

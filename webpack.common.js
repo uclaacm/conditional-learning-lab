@@ -47,7 +47,7 @@ module.exports = {
     // Serves the manifest.json file
     new PwaManifestPlugin({
       filename: 'manifest.json',
-      name: 'Your App Name Here',
+      name: 'IfBots',
       short_name: 'App Name',
       description: 'An amazing TeachLA React Website :D',
       background_color: '#ffffff',
