@@ -9,7 +9,7 @@ export default function Description():JSX.Element {
   // Automatically finds nextPage to be used for ChoiceButton
   switch (currentPage) {
     case '/':
-      description = "Welcome to the Conditional Learning Lab! Today we'll learn about conditionals in Python! \
+      description = "Welcome to IfBots! Today we'll learn about conditionals in Python! \
           We use conditionals when we want to perform actions, but only under certain circumstances! Right now, you are \
           low on energy. Should you fill up?";
       break;
