@@ -1,4 +1,4 @@
-# Your Teach LA Project Here!
+# IfBots
 
 ![Production Build](https://github.com/uclaacm/ifbots/workflows/Production%20Build/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
