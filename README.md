@@ -1,115 +1,13 @@
 # Your Teach LA Project Here!
 
-![Production Build](https://github.com/uclaacm/teach-la-react-starter-barebones/workflows/Production%20Build/badge.svg)
+![Production Build](https://github.com/uclaacm/ifbots/workflows/Production%20Build/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4932fc43-c02a-4724-bfc0-0253ac602219/deploy-status)](https://app.netlify.com/sites/teach-la-ts-react-starter/deploys)
-
-What's this? This is a template repository that sets up a few minor systems for a React micro-app, which is something that we've done frequently at Teach LA. Here's what it does:
-
-- has GitHub Actions automatically set up for testing and linting builds
-- has a default Dependabot config for `yarn` (with monthly audits)
-- has Netlify redirects set up for multi-route SPAs
-- has Webpack that helps bundle JS/TS files for browser usage
-- Husky for Git Hooks which enforces linting rules for files on commit
-- ESLint for our .TS and .TSX files
-- StyleLint with SASS guidelines for CSS, SASS, SCSS stylesheets.
-- includes the [Contributor Covenant](https://www.contributor-covenant.org/) in `CODE_OF_CONDUCT.md`
-- has a little bit of documentation for new people!
-- Some extra stuff like changing the app logo to TeachLA's logo and setting up the `src` directory for further development!
-
-## FAQs
-
-### Some lint is unnecessary :( How do I disable it?
-There are actually 2 main ways to disable lint. Disabling the "rule" entirely, or in just a single line or file!
-#### Disabling the rule entirely.
-** **Make sure this is what you really want!! It is often likely that you want to disable for just a single file.** **
-
-Depending on whether it's from `stylelint` or `eslint`, you can go to `stylelintrc.json` and add to `"rules"
-```
-<rule-name>: null
-```
-or `eslintrc.json` and add
-```
-'<rule-name>': 'off',
-```
-#### Disabling a rule for a single line or file
-Take a look at the eslint docs for this: https://eslint.org/docs/user-guide/configuring/rules#disabling-rules
-
-Or the stylelint docs for this: https://stylelint.io/user-guide/ignore-code/
-
-It's pretty simple though, it'd look something like 
-```
-/* eslint-disable <rule-name> */
-```
-or 
-```
-// eslint-disable-next-line
-```
-
-The process for `stylelint` is very similar.
-
-### Husky is yelling at me and not letting me commit :(
-
-Add the `-n` flag to your commit message to skip Husky's auto-linting.
-
-EG: `git commit -m "changes" -n`
-
-### Assets are angry and won't accept <x filetype>
-Our webpack set-up currently accepts asset files with the following extensions: `png, svg, jpg/jpeg, gif, mp3, ttf`
-
-Code for it can be seen in line 22 `webpack.dev.js` and in `webpack.prod.js`
-
-```
-      {
-        test: /\.(png|svg|jpe?g|gif|mp3|ttf)$/i, // we use regex to test different file types
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'assets/[name].[ext]',
-          },
-        },
-      },
-```
-
-If you want to add more assets like `.pdf`, `.wav`, `.mp4`, <YOUR_ASSET_TYPE> etc.
-
-- [ ] Update `webpack.dev.js` file. Change `test: /\.(png|svg|jpe?g|gif|mp3)$/i` to `test: /\.(png|svg|jpe?g|gif|mp3|<YOUR_ASSET_TYPE>)$/i`
-- [ ] Update `webpack.prod.js` file. Change `test: /\.(png|svg|jpe?g|gif|mp3)$/i,` to `test: /\.(png|svg|jpe?g|gif|mp3|<YOUR_ASSET_TYPE>)$/i`
-- [ ] (If typing is needed) add a folder under `custom_typing` => `import-<YOUR_ASSET_TYPE>`
-- [ ] (If typing is needed) create a file like `import-<YOUR_ASSET_TYPE>.d.ts`
-- [ ] (If typing is needed) add in:
-
-```
-/* eslint-disable @typescript-eslint/no-explicit-any */
-declare module '*.<YOUR_ASSET_TYPE>' {
-  const value: <YOUR_ASSET_TYPE-TYPE>;
-  export default value;
-}
-```
-      
-### How can I tell if my asset is actually being served?
-Take a look at `<YOUR_PROJECT_PATH>/asset-manifest.json`. [Like this!](https://teach-la-ts-react-starter.netlify.app/asset-manifest.json)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4932fc43-c02a-4724-bfc0-0253ac602219/deploy-status)](https://app.netlify.com/sites/ifbots/deploys)
 
 ## Overview
 
-... explain what your project is here! What technology you used, who made it, and what it was for!
-
-## Things You Should Do (and then delete this section)
-
-Thanks for using our template! We hope this makes your life developing significantly easier.
-
-Things you should do **after using this as a template**:
-
-- [ ] find-and-replace `YOUR_PROJECT_URL_HERE` with your GitHub repo's project name in this README (it's in a few places, so use an editor!)
-- [ ] set up [Netlify](https://www.netlify.com/) for this app - talk to jiin (`@doubleiis02`) if you need access to the Teach LA Netlify team.
-- [ ] turn on "Automatically delete head branches" in GitHub `Settings > Options`
-- [ ] in `Settings > Branches`, create a branch protection rule for `main` that requires PR reviews. You can optionally enable status checks, like passing `build`.
-- [ ] update the README badges for the GitHub Actions and Netlify with the correct links!
-- [ ] update and delete this documentation!
-- [ ] update `public/index.html` to have a description and title
-- [ ] update `public/favicon.svg` and `public/favaicon512.png` as needed
-- [ ] contact Regina Wang (`@reginawang99`) or Matthew Nieva (`@matthewcn56`) with any questions about our quickstarter template set-up.
+IfBots is a learning lab from ACM TeachLA made to help students in the Intro to Programming with Python class understand how conditionals, also know as if/else statements, work. Students progress through six stages, each increasing in difficulty, having them assess what the correct output should be based on their current stats and the code given to them. This project was deployed with Netlify and uses react-router, react-rewards, react-modal and react-syntax-highlighter. 
 
 ## Development Setup
 
@@ -117,8 +15,8 @@ We'll use a really common Node.js project workflow + Yarn!
 First, let's clone our repository, and install all of our yarn dependencies:
 
 ```
-git clone https://github.com/uclaacm/YOUR_PROJECT_URL_HERE.git
-cd YOUR_PROJECT_URL_HERE
+git clone https://github.com/uclaacm/ifbots.git
+cd ifbots
 ```
 
 If you don't have yarn installed...
@@ -151,7 +49,7 @@ yarn run build
 
 ## Contribution Workflow
 
-Thanks for your interest in contributing to YOUR_PROJECT_URL_HERE! ❤️
+Thanks for your interest in contributing to IfBots! ❤️
 
 Here's a quick guide on how to get started.
 
@@ -160,7 +58,7 @@ Here's a quick guide on how to get started.
 3. Beep boop away!
 4. **Before you push**, make sure your app runs with `yarn start`. If there are any errors, our CI/CD service will **reject your build**.
 5. Once you're ready, stage and commit your changes!
-6. Make a [pull request](https://github.com/uclaacm/YOUR_PROJECT_URL_HERE/pulls) with your changes, and let someone on your project team know.
+6. Make a [pull request](https://github.com/uclaacm/ifbots/pulls) with your changes, and let someone on your project team know.
    a. Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
 7. If your code passes code review, then we can merge it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 
