@@ -60,6 +60,12 @@ function App(): JSX.Element {
     }).catch(err => console.error(err));
   }, []);
 
+  const [boxChosen, setBoxChosen] = useState('');
+
+  const makeBoxChoice = (boxChoice: string) => {
+    setBoxChosen(boxChoice);
+  };
+
   return (
     <div id="app-wrapper">
       <div id="main-section">
@@ -71,7 +77,7 @@ function App(): JSX.Element {
             <Route exact path="/hungerifelse"><HungerIfElse /></Route>
             <Route exact path="/obstacleifelse"><ObstacleIfElse /></Route>
             <Route exact path="/ifelif"><IfElif /></Route>
-            <Route exact path="/nested"><Nested /></Route>
+            <Route exact path="/nested"><Nested boxChosen={boxChosen} /></Route>
           </Switch>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={controls}>
@@ -80,6 +86,7 @@ function App(): JSX.Element {
             statAction={handleStatChange}
             playerStats={playerStats}
             openPlayAgain={() => setPlayAgainOpen(true)}
+            makeBoxChoice={makeBoxChoice}
           />
         </motion.div>
       </div>

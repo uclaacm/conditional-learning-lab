@@ -8,7 +8,8 @@ interface CodeSectionProps {
   startExitAnimation: (nextPage: string) => void,
   statAction: (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => void,
   playerStats: statsObject,
-  openPlayAgain: () => void
+  openPlayAgain: () => void,
+  makeBoxChoice: (boxChoice: string) => void,
 }
 
 export default function CodeSection(props: CodeSectionProps): JSX.Element {
@@ -33,9 +34,13 @@ export default function CodeSection(props: CodeSectionProps): JSX.Element {
 
   // Parameters for onClick are (addBattery, addSpeed, addStrength, addHunger)
 
-  const handleCorrect = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number) => {
+  const handleCorrect = (addBattery: number, addSpeed: number, addStrength: number, addHunger: number, setChosenBox?: () => void) => { // eslint-disable-line
     if (currentPage === '/Nested')
       props.openPlayAgain();
+    else if (currentPage === '/IfElif' && setChosenBox) {
+      setChosenBox();
+      props.startExitAnimation(nextPage);
+    }
     else
       props.startExitAnimation(nextPage);
     props.statAction(addBattery, addSpeed, addStrength, addHunger);
@@ -81,9 +86,9 @@ export default function CodeSection(props: CodeSectionProps): JSX.Element {
     case '/IfElif':
       buttons = (
         <div className='buttons'>
-          <ChoiceButton text="Small box" correctLogic={strength <= 5 || battery <= 3} correctAction={() => handleCorrect(0, 0, -1, 0)} />
-          <ChoiceButton text="Medium box" correctLogic={strength > 5 && battery > 3} correctAction={() => handleCorrect(0, 0, -2, 0)} />
-          <ChoiceButton text="Big box" correctLogic={strength > 8 && battery > 5} correctAction={() => handleCorrect(0, 0, -3, 0)} />
+          <ChoiceButton text="Small box" correctLogic={strength <= 5 || battery <= 3} correctAction={() => handleCorrect(0, 0, -1, 0, () => props.makeBoxChoice('small'))} />
+          <ChoiceButton text="Medium box" correctLogic={strength > 5 && battery > 3} correctAction={() => handleCorrect(0, 0, -2, 0, () => props.makeBoxChoice('medium'))} />
+          <ChoiceButton text="Big box" correctLogic={strength > 8 && battery > 5} correctAction={() => handleCorrect(0, 0, -3, 0, () => props.makeBoxChoice('large'))} />
         </div>
       );
       codeContent = ['if strength > 8 and battery > 5:', '    carry(big_box)', '    strength -= 3', 'elif strength > 5 and battery > 3', '    carry(medium_box)', '    strength -= 2', 'else:', '    carry(small_box)', '    strength -= 1'];
@@ -107,7 +112,7 @@ export default function CodeSection(props: CodeSectionProps): JSX.Element {
     <div>
       <div className="hook"></div>
       <div id="code">
-        {codeContent.map((item,index) => {
+        {codeContent.map((item, index) => {
           let indents = 0;
           for (let i = 0; i < item.length; i++) {
             if (item[i] == ' ') indents += 1;
